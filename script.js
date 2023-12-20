@@ -5,7 +5,7 @@ const overlay = document.querySelector('.overlay');
 
 /* Declaring the array of image filenames */
 
-const images = ['image1.png', 'image2.png', 'image3.png', 'image4.png', 'image5.png'];
+const images = ['Image1.png', 'Image2.png', 'Image3.png', 'Image4.png', 'Image5.png'];
 const alts = {
   'img1.png': 'Photo of Scenery1',
   'img2.png': 'Photo of Scenery2',
