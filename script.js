@@ -1,36 +1,43 @@
-const images = [
-  "./Image1.jpg",
-  "./Image2.jpg",
-  "./Image3.jpg",
-  "./Image4.jpg",
-];
-const button = document.querySelector("#dark");
-let mode = false;
-document.addEventListener("DOMContentLoaded", function () {
-  const container = document.querySelector(".container");
-  const gallery = document.querySelector(".gallery");
-  var containerImage = document.createElement("img");
-  containerImage.src = images[0];
-  containerImage.alt = "image";
-  container.appendChild(containerImage);
-  images.map((image, index) => {
-    var img = document.createElement("img");
-    img.src = image;
-    img.alt = `image ${index}`;
-    img.addEventListener("click", function () {
-      containerImage.src = image;
-    });
-    gallery.appendChild(img);
+const displayedImage = document.querySelector('.displayed-img');
+const thumbBar = document.querySelector('.thumb-bar');
+const btn = document.querySelector('button');
+const overlay = document.querySelector('.overlay');
+
+/* Declaring the array of image filenames */
+
+const images = ['image1.png', 'image2.png', 'image3.png', 'image4.png', 'image5.png'];
+const alts = {
+  'img1.png': 'Photo of Scenery1',
+  'img2.png': 'Photo of Scenery2',
+  'img3.png': 'Photo of Scenery3',
+  'img4.png': 'Photo of Scenery4',
+  'img5.png': 'Photo of Scenery5',
+};
+
+/* Looping through images */
+
+for (const image of images) {
+  const newImage = document.createElement('img');
+  newImage.setAttribute('src', `images/${image}`);
+  newImage.setAttribute('alt', alts[image]);
+  thumbBar.appendChild(newImage);
+  newImage.addEventListener('click', (e) => {
+    displayedImage.src = e.target.src;
+    displayedImage.alt = e.target.alt;
   });
-  button.addEventListener("click", function () {
-    if (mode) {
-        button.innerHTML = "Darken";
-        containerImage.style.opacity = 1;
-        mode = false;
-      } else {
-        button.innerHTML = "Lighten";
-        containerImage.style.opacity = 0.5;
-        mode = true;
-      }
-  });
+}
+
+/* Wiring up the Darken/Lighten button */
+
+btn.addEventListener('click', () => {
+  const btnClass = btn.getAttribute('class');
+  if (btnClass === 'dark') {
+    btn.setAttribute('class', 'light');
+    btn.textContent = 'Lighten';
+    overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
+  } else {
+    btn.setAttribute('class', 'dark');
+    btn.textContent = 'Darken';
+    overlay.style.backgroundColor = 'rgba(0,0,0,0)';
+  }
 });
